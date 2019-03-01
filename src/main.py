@@ -1,6 +1,5 @@
-#%%
+
 import numpy as np
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 from random import randint
 
@@ -8,14 +7,12 @@ from photo import Photo
 from slide import Slide
 from slide import Slide
 
-#%%
 def parseFile(filename):
         f = open(filename,'r')
         lines = f.read().split('\n')
         lines.pop()
         return lines[1:]
 
-#%%
 def output(slideshow,out_file):
         f = open(out_file, "w")
         f.write(str(len(slideshow))+"\n")
@@ -44,14 +41,12 @@ def photoCombiner(listOfPic):
 
 
 
-#%%
 def get_slideshow(slides):
         limit = 100
         slideshow = []
         point_list = []
         bitmask = np.zeros(len(slides))
         last_added = randint(0,len(slides))
-        #bitmask[last_added] = 1
         slideshow.append(slides[last_added])
         for i in tqdm(range(len(slides)-1)):
                 max_point = 0
@@ -60,12 +55,10 @@ def get_slideshow(slides):
                 valid_indexes  = valid_indexes[0]
                 #can be done way better with binary search
                 last_added_position = np.where(valid_indexes == last_added)
-                #print(last_added_)
                 last_pos = last_added_position[0][0] 
                 sup_lim = last_pos+limit
                 inf_lim = last_pos-limit
                 wanted_indexes = np.concatenate((valid_indexes[inf_lim:last_pos-1],valid_indexes[last_pos+1:sup_lim]))
-                #print(valid_indexes)
                 if len(wanted_indexes)==0:
                         break
                 for slide in wanted_indexes:
@@ -75,14 +68,12 @@ def get_slideshow(slides):
                                 max_point = points
                         if max_point == len(slides[last_added].tags)//2:
                                 break
-                #bitmask[best_index] = 1
                 bitmask[last_added]=1
                 point_list.append(max_point)
                 slideshow.append(slides[best_index])
                 last_added=best_index
         return slideshow, point_list
 
-#%%
 def check_validity(slideshow, points):
         photos = []
         for slide in slideshow:
@@ -91,16 +82,3 @@ def check_validity(slideshow, points):
                 return 0
         else:
                 return np.sum(points)
-
-#%%
-# print("ciao")
-# main_f("ciao")
-
-#%%
-# %load_ext line_profiler
-
-# #%%
-# r = %lprun -r -f main_f main_f('files/medium.in')
-# r.print_stats()
-
-#%%sesso

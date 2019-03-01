@@ -12,14 +12,12 @@ ipywidgets==7.4.2
 jedi==0.13.3
 Jinja2==2.10
 jsonschema==3.0.0
-jupyter==1.0.0
 jupyter-client==5.2.4
 jupyter-console==6.0.0
 jupyter-core==4.4.0
 kiwisolver==1.0.1
 line-profiler==2.1.2
 MarkupSafe==1.1.1
-matplotlib==3.0.2
 mistune==0.8.4
 nbconvert==5.4.1
 nbformat==4.4.0
