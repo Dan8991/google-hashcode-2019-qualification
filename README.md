@@ -13,4 +13,4 @@ source hash-venv/bin/activate
 pip install -r freeze.txt
 ```
 
-*now you should be ready to go
+* now you should be ready to go
