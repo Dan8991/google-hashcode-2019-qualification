@@ -2,6 +2,8 @@ from main import *
 
 input_files = ["input1.txt","input2.txt","input3.txt","input4.txt"]
 index = 1
+tot_points = []
+
 for f in input_files:
     lines = parseFile("../in/"+f)
     photos = []
@@ -13,8 +15,9 @@ for f in input_files:
 
     slides = photoCombiner(photos)
     slideshow, points = get_slideshow(slides)
+    tot_points.append(check_validity(slideshow,np.array(points)))
     output(slideshow,"../out/output"+str(index)+".txt")
     index+=1
-    print(check_validity(slideshow,np.array(points)))
-
+print("\n\n\n\npoints for each input")
+print(*tot_points)
 #print([slide for slide in slideshow])
