@@ -42,20 +42,22 @@ def photoCombiner(listOfPic):
 
 
 def get_slideshow(slides):
-        limit = 100
+        limit = 10
         slideshow = []
         point_list = []
+        #bitmask where already picked slides are remembered
         bitmask = np.zeros(len(slides))
+        #index of last slide that was added to slideshow
         last_added = randint(0,len(slides))
         slideshow.append(slides[last_added])
         for i in tqdm(range(len(slides)-1)):
                 max_point = 0
                 best_index = -1
-                valid_indexes = np.nonzero(bitmask - 1)
-                valid_indexes  = valid_indexes[0]
+                #non taken slides
+                valid_indexes = np.nonzero(bitmask - 1)[0]
                 #can be done way better with binary search
-                last_added_position = np.where(valid_indexes == last_added)
-                last_pos = last_added_position[0][0] 
+                last_pos = np.where(valid_indexes == last_added)[0][0]
+                #taking 2*limit valid slides to be compared with last slide except last slide
                 sup_lim = last_pos+limit
                 inf_lim = last_pos-limit
                 wanted_indexes = np.concatenate((valid_indexes[inf_lim:last_pos-1],valid_indexes[last_pos+1:sup_lim]))
