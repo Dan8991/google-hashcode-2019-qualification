@@ -1,3 +1,4 @@
 out/*.txt
 hash-venv
 .vscode
+src/__pycache__/*
